@@ -7,10 +7,13 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div id="header-placeholder"></div>
     <main>
         <section id="cart-items">
             <!-- Cart items will be dynamically inserted here -->
         </section>
+        <button id="clear-cart">Clear Cart</button>
+        <button id="checkout">Checkout</button>
     </main>
     <footer>
         <p>&copy; 2023 Dropshipping Store</p>
@@ -33,7 +36,37 @@
             } else {
                 cartItemsContainer.innerHTML = '<p>Your cart is empty.</p>';
             }
+
+            document.getElementById('clear-cart').addEventListener('click', () => {
+                localStorage.removeItem('cart');
+                localStorage.setItem('cartCount', 0);
+                cartItemsContainer.innerHTML = '<p>Your cart is empty.</p>';
+                updateCartCount();
+            });
+
+            document.getElementById('checkout').addEventListener('click', () => {
+                window.location.href = 'checkout.html';
+            });
+
+            updateCartCount();
         });
+
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartCount = cart.length;
+            localStorage.setItem('cartCount', cartCount);
+            const cartCountElement = document.getElementById('cart-count');
+            if (cartCountElement) {
+                cartCountElement.textContent = cartCount;
+            }
+        }
+
+        function addToCart(item) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.push(item);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+        }
     </script>
 </body>
 </html>

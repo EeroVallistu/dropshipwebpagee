@@ -22,20 +22,25 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.buy-button').forEach(button => {
         button.addEventListener('click', (event) => {
             const productId = event.target.getAttribute('data-id');
-            addToCart(productId);
+            const product = products.find(p => p.id == productId);
+            addToCart(product);
         });
     });
 });
 
-// script.js
-function addToCart() {
-    let cartCount = localStorage.getItem('cartCount') || 0;
-    cartCount = parseInt(cartCount) + 1;
-    localStorage.setItem('cartCount', cartCount);
+function addToCart(item) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart.push(item);
+    localStorage.setItem('cart', JSON.stringify(cart));
     updateCartCount();
 }
 
 function updateCartCount() {
-    const cartCount = localStorage.getItem('cartCount') || 0;
-    document.getElementById('cart-count').textContent = cartCount;
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartCount = cart.length;
+    localStorage.setItem('cartCount', cartCount);
+    const cartCountElement = document.getElementById('cart-count');
+    if (cartCountElement) {
+        cartCountElement.textContent = cartCount;
+    }
 }

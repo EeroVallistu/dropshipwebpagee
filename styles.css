@@ -83,7 +83,32 @@ footer {
     bottom: 0;
 }
 
+/* styles.css */
+.cart-item {
+    display: inline-block;
+    width: 200px;
+    margin: 10px;
+    vertical-align: top;
+    text-align: center;
+}
+
 .cart-item img {
-    width: 100px; /* Adjust the width as needed */
-    height: auto; /* Maintain aspect ratio */
+    width: 100%;
+    height: auto;
+}
+
+.go-to-home {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+.go-to-home:hover {
+    background-color: #45a049;
 }
