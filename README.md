@@ -1,0 +1,2 @@
+# hobiprojekt
+Sissejuhatus programmeerimisse hobiprojekt
