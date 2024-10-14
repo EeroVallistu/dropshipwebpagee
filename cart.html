@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <main>
+        <section id="cart-items">
+            <!-- Cart items will be dynamically inserted here -->
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Dropshipping Store</p>
+    </footer>
+    <script src="script.js"></script>
+    <script src="loadHeader.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cartItemsContainer = document.getElementById('cart-items');
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            if (cart.length > 0) {
+                cartItemsContainer.innerHTML = cart.map(item => `
+                    <div class="cart-item">
+                        <img src="${item.image}" alt="${item.name}">
+                        <h2>${item.name}</h2>
+                        <p>${item.price}</p>
+                    </div>
+                `).join('');
+            } else {
+                cartItemsContainer.innerHTML = '<p>Your cart is empty.</p>';
+            }
+        });
+    </script>
+</body>
+</html>
